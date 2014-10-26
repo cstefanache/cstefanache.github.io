@@ -6,28 +6,69 @@
         <title>myrighttocode by cstefanache</title>
 
         <link rel="stylesheet" href="stylesheets/styles.css" />
-        <link rel="stylesheet/less" type="text/css" href="stylesheets/myrighttocode.less" />
 
+        <link rel="stylesheet" href="stylesheets/font-awesome.min.css" />
 
+        <link rel="stylesheet" href="stylesheets/highlight/shCore.css" type="text/css" />
+        <link rel="stylesheet" href="stylesheets/highlight/shCoreMidnight.css" type="text/css" />
+
+        <script src="javascripts/jquery.min.js"></script>
+        <script src="javascripts/underscore.min.js"></script>
         <script src="javascripts/less.min.js"></script>
+        <script src="javascripts/angular.min.js"></script>
+        <script src="javascripts/angular-route.min.js"></script>
+
+        <script type="text/javascript" src="javascripts/sh/shCore.js"></script>
+        <script type="text/javascript" src="javascripts/sh/shLegacy.js"></script>
+        <script type="text/javascript" src="javascripts/sh/shBrushJScript.js"></script>
+        <script type="text/javascript" src="javascripts/sh/shBrushCss.js"></script>
+        <script type="text/javascript" src="javascripts/sh/shBrushXml.js"></script>
+        <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+
 
     </head>
-    <body>
-        <span id="loading">
-            <span class="wrapper">
-                <span class="p1"></span>
-                <span class="p2"></span>
-                <span class="p2 green"></span>
-                <span class="p3"></span>
-                <span class="p4"></span>
+    <body ng-app="mrc">
 
-                <span class="bubble b1"></span>
-                <span class="bubble b2"></span>
-                <span class="bubble b3"></span>
-                <span class="bubble b4"></span>
+        <div class="header">
+            <div>myRightToCode.org</div>
+            <!-- <span ng-class="getMenuClass('/about')" ng-click="moveTo('about')">About</span> -->
+
+            <span ng-class="getMenuClass('/blog')" ng-click="moveTo('blog')">Blog</span>
+            <span ng-class="getMenuClass('/presentations')" ng-click="moveTo('presentations')">Presentations</span>
+            <span class="searchable">
+                <span ng-class="getSearchClass()">
+                    <div class="item" ng-repeat="item in searchFound" ng-click="goTo(item)">
+                        {{item.description}}
+                    </div>
+                </span>
+                <input type="text" length="30" placeholder="search" ng-model="search" ng-change="doSearch(search)"/>
+                <span class="search" >
+                    <i class="fa fa-search"></i>
+                </span>
 
             </span>
-            <h1>Under Construction</h1>
-        </span>
+            <span class="linkables">
+                <a href="https://twitter.com/_cstefanache"><i class="fa fa-twitter"></i></a>
+                <a href="https://facebook.com/cornel.stefanache"><i class="fa fa-facebook"></i></a>
+                <a href="https://github.com/cstefanache"><i class="fa fa-github"></i></a>
+            </span>
+        </div>
+        <div class="content">
+            <div ng-view class="innercontent" autoscroll="true"></div>
+        </div>
+        <div class="background"></div>
     </body>
+
+    <script>
+        org = {'mrc': {}};
+        $(window).on("scroll touchmove", function() {
+            $('.header').toggleClass("sticky", $(this).scrollTop() > 80);
+        });
+    </script>
+    <script src="app/services.js"></script>
+    <script src="app/controllers.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/app.js"></script>
+
 </html>

@@ -1,9 +1,162 @@
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,600);
+@import url(http://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
 body {
   font-family: 'Raleway', sans-serif;
-  color:#777;
+  color:#000;
   font-weight:300;
-  width: 100%;
+  background: url("../assets/images/b2.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 0px;
+  margin: 120px 0px 80px 0px;
 }
 
+a, a:visited {
+  color: #000000;
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 48px;
+  border-bottom: 1px solid #808080;
+  margin-top: 0px;
+  padding: 20px 2px;
+  background-color: #D0D0D0;
+}
+
+.none {
+  display: none;
+}
+
+.content {
+  background-color: #FFFFFF;
+  margin: 0px auto;
+  max-width: 960px;
+  min-width: 640px;
+}
+
+.innercontent {
+  padding: 20px;
+}
+
+
+.searchable {
+  position: relative;
+}-top
+
+.searchable input {
+  width: 200px;
+}
+
+.found {
+  position: absolute;
+  top: 24px;
+  left: 0px;
+  max-height: 300px;
+  width: 400px;
+  background-color: rgba(255,255,255,0.95);
+  border: 1px solid #808080;
+  border-radius: 2px;
+  padding: 4px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.found .item {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.found .item:hover {
+  cursor: pointer;
+  border-bottom: 1px solid #c10000;
+}
+
+
+
+.search {
+  margin-left: -30px;
+}
+
+.linkables {
+  float:right;
+  margin-right: 20px;
+  padding-top: 5px;
+}
+
+.linkables i {
+  margin-right: 10px;
+}
+
+.header {
+  width:100%;
+  height:120px;
+  background: #FFF;
+  text-align: center;
+  position:fixed;
+  top:0;
+  left:0;
+  transition: margin-top 500ms;
+  border-bottom: 1px solid #000;
+  z-index: 9999;
+}
+
+.header.sticky {
+  margin-top: -80px;
+}
+
+.header div {
+  font-size: 2.8em;
+  margin-bottom: 30px;
+}
+
+.header .menu {
+  display:inline-block;
+  margin-right: 20px;
+  font-size: 1.2em;
+  padding: 2px 8px;
+}
+
+.header .menu:hover {
+  cursor: pointer;
+  border-bottom: 2px solid #c10000;
+}
+
+
+.header .menu.selected {
+  border-bottom: 2px solid #aa0000;
+}
+
+.navigation {
+  background-color: #99CCFF;
+  display: block;
+  font-size: 16px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.navigation .section {
+    width: 30%;
+}
+
+.navigation .previous {
+  float: left;
+}
+
+.navigation .next {
+  float: right;
+  text-align: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.presentation {
+  margin: 0px auto;
+  display: block;
+  text-align: center;
+}
