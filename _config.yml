@@ -12,15 +12,17 @@ relative_permalinks: true
 title:               MyRightToCode
 tagline:             ''
 description:         "Here comes blog's description"
-url:                 http://127.0.0.1:4000
+url:                 "http://myrighttocode.org/#/blog"
 baseurl:             /
 paginate:            1
 
 # About/contact
 author:
-  name:              Mark Otto
+  name:              Cornel Stefanache
   url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  email:             cornel.stefanache@gmail.com
+  twitter_username:  _cstefanache
+  github_username:   cornel.stefanache
 
 # Custom vars
 version:             1.0.0
