@@ -19,14 +19,13 @@ paginate:            1
 # About/contact
 author:
   name:              Cornel Stefanache
-  url:               https://twitter.com/mdo
   email:             cornel.stefanache@gmail.com
   twitter_username:  _cstefanache
   github_username:   cornel.stefanache
 
 # Custom vars
 version:             1.0.0
-gems: ['jekyll-archives', 'jekyll-lunr-js-search']
+gems: ['jekyll-archives']
 
 jekyll-archives:
   enabled: 'month'
