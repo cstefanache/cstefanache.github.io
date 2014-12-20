@@ -17,35 +17,36 @@ The example below presents the minimal amount of code needed to see how AngularJ
 application can be tested [here][staticPage]). This is a simple application that presents the 
 AngularJS double binding functionality and how this is bootstrapped.
 
+HTML Code:
 {% highlight html %}
 <html>
-  <head>
+<head>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
- </head>
- <body ng-app='minapp'>
-    <div ng-controller='helloController'>
-        <h2>Hello {{name}}</h2>
-        <div>
-            Name: <input ng-model='name'>
-        </div>
-        
+</head>
+<body ng-app='minapp'>
+<div ng-controller='helloController'>
+    <div>
+        Name: <input ng-model='name'>
     </div>
- </body>
+    <h2>Hello {% raw %}{{name}}{% endraw %}</h2>
+</div>
+</body>
+<script>
+    //Define minapp module
+    angular.module('minapp', []);
+
+    //Define hello controller
+    angular
+            .module('minapp')
+            .controller('helloController', ['$scope', function($scope) {
+                $scope.name = 'untitled';
+            }]);
+</script>
 </html>
+
 {% endhighlight %}
 
-{% highlight js %}
-//Define minapp module
-angular.module('minapp', []);
-
-//Define hello controller
-angular
-  .module('minapp')
-  .controller('helloController', ['$scope', function($scope) {
-    $scope.name = 'untitled';
-}]);
-{% endhighlight %}
 
 Starting with this piece of code you can add on top of it the complexity you need to make you happy.
 
