@@ -297,6 +297,8 @@ tbody tr:nth-child(odd) th {
   padding-top:    1rem;
   padding-bottom: 1rem;
   margin-bottom: 3rem;
+  height: 150px;
+  background: #bce4e7 url('../headerback.png') no-repeat right;
 }
 .masthead-title {
   margin-top: 0;
