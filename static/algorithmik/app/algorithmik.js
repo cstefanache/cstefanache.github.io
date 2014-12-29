@@ -64,7 +64,7 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
     }
 
     $scope.execute = function(event) {
-        if (!event || event.key === 'F9') {
+        if (!event || (event.key === 'F9' || event.keyCode === 120)) {
             $.jStorage.set("problem"+problem, codeMirror.getValue());
             evaluate();
         }
