@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Algorithmik.JS</title>
+    <link rel="stylesheet" href="lib/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="lib/dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <link rel="stylesheet" href="styles/overrides.css">
+
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
+    <script src="lib/dist/js/bootstrap.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/codemirror.js"></script>
+    <script src="lib/jstorage.min.js"></script>
+    <script src="lib/javascript.js"></script>
+
+
+    <script src="app/algorithmik.js"></script>
+
+</head>
+<body ng-app="algorithmik" >
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Algorithmik</a>
+        </div>
+        <!--
+        <div class="collapse navbar-collapse">
+            <div class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-primary navbar-btn">Execute [F9]</button>
+            </div>
+        </div>
+        -->
+    </div>
+</nav>
+<div class="container-fluid" ng-controller="Algorithmik" ng-keyup="execute($event)">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div ng-class="getDataPanelClass()">
+                <div class="panel-heading ">
+                    <span ng-if="switch < 2">Input </span>
+                    <span ng-if="switch == 2">Output </span>
+                    Data
+                    <span class="btn btn-xs btn-primary pull-right" ng-click="switchData()" ng-if="switch > 0">
+                        {{switch == 2 ? 'Show Input' : 'Show Output'}}
+                    </span>
+                </div>
+                <div class="panel-body" id="data">
+                </div>
+                <div class="panel-footer">{{getDescription()}}</div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Algorithm
+                    <button type="button" class="btn btn-xs btn-warning pull-right" ng-click="reset()">Reset Code</button>
+                </div>
+                <div id="cm"></div>
+                <div class="panel-footer">
+                    &nbsp;
+                    <span ng-if="statusType == 1" class="label label-danger">{{message}}</span>
+                    <span ng-if="statusType == 2" class="label label-default">{{message}}</span>
+                    <span ng-if="statusType == 3" class="label label-success">{{message}}</span>
+                    <button type="button" class="btn btn-xs btn-primary pull-right" ng-click="execute()">Execute [F9]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
