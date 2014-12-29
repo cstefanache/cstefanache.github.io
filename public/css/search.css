@@ -1,0 +1,97 @@
+/* Style the `label` that we use to target the `.sidebar-search */
+.sidebar-search {
+  position: absolute;
+  top:  3rem;
+  left: .425rem;
+  display: block;
+  width: 2.2rem;
+  padding: .5rem .7rem;
+  margin-left: .65rem;
+  color: #000;
+  background-color: #66d9ef;
+  box-shadow: 0px 2px 0 .2px #268bd2;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.sidebar-search:before {
+	display: block;
+	content: "";
+	width: 100%;
+	width: .3rem;
+	height: .3rem;
+	border: .125rem solid;
+	background: transparent;
+	-webkit-border-radius: .75rem;
+	-moz-border-radius: .75rem;
+	border-radius: .75rem;
+}
+
+.sidebar-search:after {
+	display: block;
+	content: "";
+	left: .625rem;
+	width: 0;
+	height: .1875rem;
+	margin: -.145rem .25rem 0 .5rem;
+	-webkit-transform: rotate(-35deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	border: .125rem solid;
+}
+
+.sidebar-search:active,
+#sidebar-search:checked ~ .sidebar-search {
+  color: #fff;
+  background-color: #505050;
+}
+
+@media (min-width: 30.1em) {
+  .sidebar-search {
+    left: 3rem;
+    margin: 0 .65rem;
+    position: fixed;
+  	top: 1rem;
+    width: 2.25rem;
+  }
+}
+
+.sidebar-search {
+  -webkit-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.sidebar-search {
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+          transition: transform .3s ease-in-out;
+}
+
+#sidebar-checkbox:checked ~ .sidebar-search {
+  -webkit-transform: translateX(14rem);
+      -ms-transform: translateX(14rem);
+          transform: translateX(14rem);
+}
+
+#search {
+	margin: 0 2rem 2rem 0;
+	text-align: center;
+	width: 100%;
+}
+
+#search-query {
+	display: none;
+	outline: none;
+	color: #555;
+	background: #fff;
+	width: 60%;
+	padding: .625rem;
+	margin: 1.25rem auto;
+	font-size: 1.25rem;
+}
+
+#search-results {
+	display: none;
+	text-align: left;
+}

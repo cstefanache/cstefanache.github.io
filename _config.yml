@@ -11,7 +11,7 @@ relative_permalinks: true
 # Setup
 title:               MyRightToCode
 tagline:             ''
-description:         "Here comes blog's description"
+description:         "Here comes blog description"
 url:                 "http://myrighttocode.org/#/blog"
 baseurl:             /
 paginate:            1
@@ -25,7 +25,7 @@ author:
 
 # Custom vars
 version:             1.0.0
-gems: ['jekyll-archives']
+gems: ['jekyll-archives', 'jekyll-lunr-js-search']
 
 jekyll-archives:
   enabled: 'month'
@@ -33,3 +33,8 @@ jekyll-archives:
   permalinks: '/archives'
   year: '/:year/'
   month: '/:year/:month/'
+
+jekyll-lunr-js-search:
+  excludes: ['rss.xml', 'atom.xml', 'about', 'home']
+  layout: 'search'
+  permalinks: '/search'

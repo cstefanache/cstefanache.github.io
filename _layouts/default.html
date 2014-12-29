@@ -18,13 +18,21 @@
         </div>
       </div>
 
+      <div id="search">
+        <form action="/search" method="get">
+          <input type="text" id="search-query" name="q" placeholder="Search" autocomplete="off">
+        </form>
+      </div>
+
       <div class="container content">
         {{ content }}
       </div>
     </div>
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    <!-- <label for="sidebar-search" class="sidebar-search"></label> -->
 
+    <script src="/js/search.min.js" charset="utf-8"></script>
     <script>
       (function(document) {
         var toggle = document.querySelector('.sidebar-toggle');
@@ -40,6 +48,18 @@
 
           checkbox.checked = false;
         }, false);
+
+        $("#sidebar-search").click(function() {
+          $('#search-query').toggle('slow');
+        });
+
+        $('#search-query').lunrSearch({
+          indexUrl: '/js/index.json',   // Url for the .json file containing search index data
+          results : '#search-results',  // selector for containing search results element
+          entries : '.entries',         // selector for search entries containing element (contained within results above)
+          template: '#search-results-template'  // selector for Mustache.js template
+        });
+
       })(document);
     </script>
   </body>
