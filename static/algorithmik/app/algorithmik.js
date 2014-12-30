@@ -2,7 +2,7 @@ var app = angular.module('algorithmik', []);
 
 app.controller('Algorithmik', ['$scope', function ($scope) {
 
-    var problem = 0;
+    var test = 0;
     var executionOutput;
 
     var codeMirror = CodeMirror(document.getElementById('cm'), {
@@ -19,30 +19,41 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
         readOnly: true
     });
 
-    dataMirror.setValue(JSON.stringify(problems[problem].data));
+    function prepareData() {
+        dataMirror.setValue(JSON.stringify(tests[test].data));
+        var code = $.jStorage.get("test" + test);
+        if (code) {
+            codeMirror.setValue(code);
+        } else {
+            codeMirror.setValue(tests[test].template);
+        }
 
-    var code = $.jStorage.get("problem"+problem);
-    if (code) {
-        codeMirror.setValue(code);
-    } else {
-        codeMirror.setValue(problems[problem].template);
+
+        //Public variables
+        $scope.statusType = 0;
+        $scope.message = "Execute the code";
+        $scope.switch = 0;
     }
 
+    prepareData()
 
+    $scope.loadTest = function(index) {
+        test = index;
+        prepareData();
+    }
 
-    //Public variables
-    $scope.statusType = 0;
-    $scope.message = "Execute the code";
-    $scope.switch = 0;
+    $scope.tests = _.map(tests, function(item) {
+       return item.name;
+    });
 
     //Private variables
     $scope.getDescription = function() {
-        return problems[problem].description;
+        return tests[test].description;
     };
 
     $scope.switchData = function() {
         if ($scope.switch == 2) {
-            dataMirror.setValue(JSON.stringify(problems[problem].data));
+            dataMirror.setValue(JSON.stringify(tests[test].data));
             $scope.switch = 1;
         } else if ($scope.switch == 1) {
             dataMirror.setValue(JSON.stringify(executionOutput));
@@ -59,25 +70,25 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
     };
 
     $scope.reset = function() {
-        codeMirror.setValue(problems[problem].template);
-        $.jStorage.deleteKey("problem"+problem);
+        codeMirror.setValue(tests[test].template);
+        $.jStorage.deleteKey("test"+test);
     }
 
     $scope.execute = function(event) {
         if (!event || (event.key === 'F9' || event.keyCode === 120)) {
-            $.jStorage.set("problem"+problem, codeMirror.getValue());
+            $.jStorage.set("test"+test, codeMirror.getValue());
             evaluate();
         }
     };
 
     function evaluate() {
         try {
-            var input = _.clone(problems[problem].data);
+            var input = _.clone(tests[test].data);
             var start = new Date;
             eval(codeMirror.getValue());
             var time = new Date - start;
             executionOutput = output;
-            var correct = problems[problem].evaluate(output);
+            var correct = tests[test].evaluate(output);
 
             if (!correct) {
                 $scope.statusType = 2;
@@ -99,7 +110,7 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
     }
 }]);
 
-var problems = [
+var tests = [
 
     {
         'name': 'Simple Sort',
@@ -115,6 +126,20 @@ var problems = [
                 }
                 last = item;
             });
+
+            return correct;
+        }
+    },
+    {
+        'name' : 'Remove Numeric Duplicates',
+        'data' : [1,3,3,3,1,5,6,7,8,1],
+        'description' : 'Remove duplicates',
+        'template' : '//var input = [data values]; \n var output = []',
+        'evaluate' : function(output) {
+            var correct = true;
+            if (!(output instanceof Array) || (output.length!=6)) {
+                correct = false;
+            }
 
             return correct;
         }
