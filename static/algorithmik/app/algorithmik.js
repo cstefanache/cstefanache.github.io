@@ -113,12 +113,12 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
             $scope.statusType = 1;
             $scope.message = e.message;
 
-
-            console.log(e.message, e.lineNumber);
             if (e.lineNumber) {
                 var lineNumber = $(".CodeMirror-linenumber")[e.lineNumber-1];
                 if (lineNumber) lineNumber.className += ' line-error';
             }
+
+            console.log(e.stack);
 
         }
 
