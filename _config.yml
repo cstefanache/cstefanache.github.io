@@ -25,7 +25,7 @@ author:
 
 # Custom vars
 version:             1.0.0
-gems: ['jekyll-archives', 'jekyll-lunr-js-search']
+gems: ['jekyll-archives']
 
 jekyll-archives:
   enabled: 'month'

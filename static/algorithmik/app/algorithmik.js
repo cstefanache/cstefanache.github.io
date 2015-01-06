@@ -37,21 +37,21 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
 
     prepareData()
 
-    $scope.loadTest = function(index) {
+    $scope.loadTest = function (index) {
         test = index;
         prepareData();
     }
 
-    $scope.tests = _.map(tests, function(item) {
-       return item.name;
+    $scope.tests = _.map(tests, function (item) {
+        return item.name;
     });
 
     //Private variables
-    $scope.getDescription = function() {
+    $scope.getDescription = function () {
         return tests[test].description;
     };
 
-    $scope.switchData = function() {
+    $scope.switchData = function () {
         if ($scope.switch == 2) {
             dataMirror.setValue(JSON.stringify(tests[test].data));
             $scope.switch = 1;
@@ -61,7 +61,7 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
         }
     };
 
-    $scope.getDataPanelClass = function() {
+    $scope.getDataPanelClass = function () {
         if ($scope.switch == 2) {
             return 'panel panel-primary';
         } else {
@@ -69,42 +69,57 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
         }
     };
 
-    $scope.reset = function() {
+    $scope.reset = function () {
         codeMirror.setValue(tests[test].template);
-        $.jStorage.deleteKey("test"+test);
+        $.jStorage.deleteKey("test" + test);
     }
 
-    $scope.execute = function(event) {
+    $scope.execute = function (event) {
         if (!event || (event.key === 'F9' || event.keyCode === 120)) {
-            $.jStorage.set("test"+test, codeMirror.getValue());
+            $.jStorage.set("test" + test, codeMirror.getValue());
             evaluate();
         }
     };
 
     function evaluate() {
+        $(".CodeMirror-linenumber").removeClass('line-error')
+        var input = _.clone(tests[test].data);
+        var start = new Date;
         try {
-            var input = _.clone(tests[test].data);
-            var start = new Date;
-            eval(codeMirror.getValue());
+            var funk = new Function('input', codeMirror.getValue());
             var time = new Date - start;
-            executionOutput = output;
-            var correct = tests[test].evaluate(output);
+            var output = funk(input);
 
-            if (!correct) {
+            if (!output) {
                 $scope.statusType = 2;
-                $scope.message = "Output does not meet the requirements";
+                $scope.message = "output value not returned. Use: return variable to provide output result.";
             } else {
-                $scope.statusType = 3;
-                $scope.message = "Completed in "+time+" ms";
+                var result = tests[test].evaluate(output);
+
+                if (!result.correct) {
+                    $scope.statusType = 2;
+                    $scope.message = result.message;
+                } else {
+                    $scope.statusType = 3;
+                    $scope.message = "Completed in " + time + " ms";
+                }
+
+                $scope.switch = 2;
+                dataMirror.setValue(JSON.stringify(output));
             }
 
-            $scope.switch = 2;
-            dataMirror.setValue(JSON.stringify(executionOutput));
-        } catch (error) {
+        } catch (e) {
             $scope.switch = 0;
             $scope.statusType = 1;
-            $scope.message = error.message;
-            dataMirror.setValue(input);
+            $scope.message = e.message;
+
+
+            console.log(e.message, e.lineNumber);
+            if (e.lineNumber) {
+                var lineNumber = $(".CodeMirror-linenumber")[e.lineNumber-1];
+                if (lineNumber) lineNumber.className += ' line-error';
+            }
+
         }
 
     }
@@ -115,35 +130,31 @@ var tests = [
     {
         'name': 'Simple Sort',
         'data': [1, 2, 3, 4, 5, 6, 7, 3, 2, 9, 3, 7, 2],
-        'description' : 'Sort the array asc',
-        'template': '//var input = [data values]; \nconsole.log(input); \n var output = input',
-        'evaluate': function(output) {
-            var correct = true;
-            var last;
-            _.each(output, function (item) {
-                if (correct && last && last > item) {
-                    correct = false;
-                }
-                last = item;
-            });
+        'description': 'Sort the array asc',
+        'template': 'var output = input; \n \n \n //enter code here \n \n \n return output;',
+        'evaluate': function (output) {
 
-            return correct;
-        }
-    },
-    {
-        'name' : 'Remove Numeric Duplicates',
-        'data' : [1,3,3,3,1,5,6,7,8,1],
-        'description' : 'Remove duplicates',
-        'template' : '//var input = [data values]; \n var output = []',
-        'evaluate' : function(output) {
             var correct = true;
-            if (!(output instanceof Array) || (output.length!=6)) {
+            var message = "Output does not meet the requirements";
+
+            if (!(output instanceof Array)) {
+                message = "Output must be an array";
                 correct = false;
             }
 
-            return correct;
+            if (correct) {
+                var last;
+                _.each(output, function (item) {
+                    if (correct && last && last > item) {
+                        correct = false;
+                        message = "List not sorted."
+                    }
+                    last = item;
+                });
+            }
+
+            return {'correct' : correct, 'message' : message};
         }
     }
-
 
 ]

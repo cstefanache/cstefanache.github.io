@@ -12,3 +12,8 @@ body {
     height: 417px;
     overflow:auto;
 }
+
+.line-error {
+    background-color: #FF0000;
+    color: #000000;
+}
