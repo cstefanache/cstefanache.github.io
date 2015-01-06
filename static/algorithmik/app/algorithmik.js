@@ -88,7 +88,7 @@ app.controller('Algorithmik', ['$scope', function ($scope) {
         try {
             var funk = new Function('input', codeMirror.getValue());
             var time = new Date - start;
-            var output = funk(input);
+            var output = executionOutput = funk(input);
 
             if (!output) {
                 $scope.statusType = 2;
