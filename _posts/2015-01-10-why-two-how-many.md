@@ -5,7 +5,7 @@ date:   2015-01-10 10:00:00
 categories: js angularjs
 ---
 
-![Post image](resources/images/mintwo/top.png)
+![Post image](/resources/images/mintwo/top.png)
 
 The digest cycle is responsible for rendering the view based on template scope and controller logic. AngularJS digest 
 cycle will be executed once an event was triggered on the page or at a specified time interval. The cycle will be ran
@@ -41,7 +41,7 @@ Fun stuff: fun
 
 For each DOM element that contains a binding to the AngularJS scope a new watcher will be
 registered in the $$watchers variable of the current $scope.
-![Adding watcher](resources/images/mintwo/register_watcher.gif)
+![Adding watcher](/resources/images/mintwo/register_watcher.gif)
 
 Every watcher will store the last value returned for the previous digest cycle in order to check future values. A new 
 digest cycle will be required if at least one of the watcher will have different last and current values. For our small 
@@ -76,7 +76,7 @@ Processed message is: (message)
 Fun stuff: fun
 {% endhighlight %}
 
-![Adding watcher](resources/images/mintwo/iterations.gif)
+![Adding watcher](/resources/images/mintwo/iterations.gif)
 
 Consider changing the controller as follows:
 
