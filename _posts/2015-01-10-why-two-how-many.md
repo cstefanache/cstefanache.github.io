@@ -2,7 +2,7 @@
 layout: post
 title:  "Why two and how many (digest cycles)?"
 date:   2015-01-10 10:00:00
-categories: js angularjs
+categories: js angularjs blog
 ---
 
 ![Post image](/resources/images/mintwo/top.png)

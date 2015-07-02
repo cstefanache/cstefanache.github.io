@@ -2,7 +2,9 @@
 layout: post
 title:  "Minimal AngularJS Application"
 date:   2014-12-20 07:36:00
-categories: js angularjs
+img: post03.jpg
+thumb: thumb03.jpg
+categories: js angularjs blog
 ---
 
 Every time I start up playing around with a new framework or library, I encounter the same problem 
