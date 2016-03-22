@@ -15,7 +15,7 @@ permalink: /
                 <img class="img-responsive" src="{{ "/assets/img/blog/" | prepend: site.baseurl }}{{ post.img }}">
             </a>
             <a href="{{ post.url | prepend: site.baseurl }}"><h3 class="ctitle">{{ post.title }}</h3></a>
-            <p><csmall>{{ post.date | date: "%b %-d, %Y" }}. | By: {{ post.author }}</csmall></p>
+            <p><csmall>{{ post.date | date: "%b %-d, %Y" }}.</csmall></p>
             {{ post.excerpt }}
             <p><a href="{{ post.url | prepend: site.baseurl }}">[Read More]</a></p>
             <div class="hline"></div>
@@ -26,9 +26,9 @@ permalink: /
         <div class="col-md-3">
             <h4>Archive</h4>
             <div class="hline"></div>
-            {% for post in site.categories['blog'] limit:5 %} 
+            {% for post in site.categories['blog'] limit:5 %}
                 <h4><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}.</a></h4>
-            {% endfor %} 
+            {% endfor %}
         </div>
 
 
