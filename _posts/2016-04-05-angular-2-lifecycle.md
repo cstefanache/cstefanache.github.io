@@ -11,7 +11,7 @@ categories:
 ---
 
 Angular 2 Components and Directives have multiple lifetime hooks where custom logic can be executed.
-One important aspect is to know what is executed when. In Angular <1.5 (prior to components) most of the 
+One important aspect is to know what is executed and when. In Angular <1.5 (prior to components) most of the 
 time we would use a ```timeout(()=>{}, 0)``` in order to make sure that everything was initialized before
 doing any crazy actions. In Angular 1.5 we have more advanced component lifetime hooks that can be 
 read in details in Pascal's blog here: [Exploring Angular 1.5: Lifecycle Hooks](http://blog.thoughtram.io/angularjs/2016/03/29/exploring-angular-1.5-lifecycle-hooks.html)
@@ -82,8 +82,9 @@ will output:
 
 The next step is **ngOnInit** that will be executed **only once** after all data-bindings were performed.
 
-For people coming from *Angular 1.x*, probably, the **ngDoCheck** function is what you are seeking into building highly performant components. 
-This function will be triggered with each change detection run - this is very similar with what the digest cycle dirty checking was doing in AngularJS 1.x. 
+For people coming from *Angular 1.x*, probably, the **ngDoCheck** function is what you are seeking into building highly performant components.
+The function will be triggered with each change detection run - this is very similar with what the digest cycle dirty checking was doing in AngularJS 1.x.
+This lifecycle hook must be used for all checks that Angular cannot do (local data, async states etc.) and not for input properties.
 
 If you need to reference any DOM Element from your component the first (and probably) the best location to reference is in the next lifecycle: **ngAfterViewInit**. 
 At this point in time the DOM of your component is complete and any @ViewChild property from your component will have a reference.  
