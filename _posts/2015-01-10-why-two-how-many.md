@@ -4,7 +4,10 @@ title:  "Why two and how many (digest cycles)?"
 date:   2015-01-10 10:00:00
 img: top.png
 thumb: mrc-angular.png
-categories: js angularjs blog
+categories: 
+- blog
+- js
+- angularjs
 ---
 The digest cycle is responsible for rendering the view based on template scope and controller logic. AngularJS digest
 cycle will be executed once an event was triggered on the page or at a specified time interval. The cycle will be ran

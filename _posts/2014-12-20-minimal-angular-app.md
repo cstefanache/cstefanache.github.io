@@ -4,7 +4,10 @@ title:  "Minimal AngularJS Application"
 date:   2014-12-20 07:36:00
 img: top.png
 thumb: mrc-angular.png
-categories: js angularjs blog
+categories: 
+- blog
+- js
+- angularjs
 ---
 
 Every time I start up playing around with a new framework or library, I encounter the same problem

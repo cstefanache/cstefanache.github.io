@@ -1,17 +1,29 @@
-/*	################################################################
+@font-face {
+	font-family: 'AvenirNextLTPro-Regular';
+	src: url('http://code.ionicframework.com/assets/fonts/28882F_0_0.eot');
+	src: url('http://code.ionicframework.com/assets/fonts/28882F_0_0.eot?#iefix') format('embedded-opentype'), url('http://code.ionicframework.com/assets/fonts/28882F_0_0.woff') format('woff'), url('http://code.ionicframework.com/assets/fonts/28882F_0_0.ttf') format('truetype'); }
 
-	Author: Carlos Alvarez
-	URL: http://alvarez.is
+@font-face {
+	font-family: 'AvenirNextLTPro-Medium';
+	src: url('http://code.ionicframework.com/assets/fonts/28882F_1_0.eot');
+	src: url('http://code.ionicframework.com/assets/fonts/28882F_1_0.eot?#iefix') format('embedded-opentype'), url('http://code.ionicframework.com/assets/fonts/28882F_1_0.woff') format('woff'), url('http://code.ionicframework.com/assets/fonts/28882F_1_0.ttf') format('truetype'); }
 
-	Project Name: SOLID - Bootstrap 3 Theme
-	Version: 1.0
-	URL: http://alvarez.is
+@font-face {
+	font-family: 'AvenirNextLTPro-UltLt';
+	src: url('http://code.ionicframework.com/assets/fonts/29CC36_0_0.eot');
+	src: url('http://code.ionicframework.com/assets/fonts/29CC36_0_0.eot?#iefix') format('embedded-opentype'), url('http://code.ionicframework.com/assets/fonts/29CC36_0_0.woff') format('woff'), url('http://code.ionicframework.com/assets/fonts/29CC36_0_0.ttf') format('truetype'); }
 
-################################################################# */
-@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
-@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
-@import url("prettyPhoto.css") screen;
-@import url("hoverex-all.css") screen;
+/* Frieght Text Pro */
+@font-face {
+	font-family: 'FreightTextProBook-Regular';
+	src: url('http://code.ionicframework.com/assets/fonts/29D26A_0_0.eot');
+	src: url('http://code.ionicframework.com/assets/fonts/29D26A_0_0.eot?#iefix') format('embedded-opentype'), url('http://code.ionicframework.com/assets/fonts/29D26A_0_0.woff') format('woff'), url('http://code.ionicframework.com/assets/fonts/29D26A_0_0.ttf') format('truetype'); }
+
+@font-face {
+	font-family: 'FreightTextProMedium-Regular';
+	src: url('http://code.ionicframework.com/assets/fonts/29D26A_1_0.eot');
+	src: url('http://code.ionicframework.com/assets/fonts/29D26A_1_0.eot?#iefix') format('embedded-opentype'), url('http://code.ionicframework.com/assets/fonts/29D26A_1_0.woff') format('woff'), url('http://code.ionicframework.com/assets/fonts/29D26A_1_0.ttf') format('truetype'); }
+
 
 /*	################################################################
 	1. GENERAL STRUCTURES
@@ -26,22 +38,26 @@ body {
 	margin: 0;
 	height: 100%;
 	color: {{ site.colors.secondary }};
-	font-family: 'Lato', sans-serif;
+	font-family: "AvenirNextLTPro-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 400;
+	font-size: 18px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Raleway', sans-serif;
+	font-family: "AvenirNextLTPro-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 700;
+	margin-top: 40px;
+	margin-bottom: 20px;
 }
 
 p {
 	padding: 0;
-	margin-bottom: 12px;
-	font-family: 'Lato', sans-serif;
+	margin-bottom: 18px;
+	font-family: "AvenirNextLTPro-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 400;
-	font-size: 14px;
-	line-height: 24px;
+	font-size: 18px;
+	line-height: 26px;
+	text-align: justify;
 	color: {{ site.colors.secondary }};
 	margin-top: 10px;
 }
@@ -103,7 +119,7 @@ a:focus {
 }
 
 .navbar-brand {
-	font-family: 'Raleway', sans-serif;
+	font-family: "AvenirNextLTPro-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 900;
 }
 
@@ -484,7 +500,7 @@ csmall {
 	}
 
 .popular-posts li em {
-	font-family: 'Lato', sans-serif;
+	font-family: "AvenirNextLTPro-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	color: #b3b3b3
 	}

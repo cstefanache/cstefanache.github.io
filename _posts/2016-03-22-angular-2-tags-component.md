@@ -4,7 +4,10 @@ title:  "Angular 2 Tags Input Component"
 date:   2016-03-22 10:00:00
 img: angular2-generic.png
 thumb: mrc-angular2.png
-categories: typescript angular2 blog
+categories: 
+- blog
+- typescript
+- angular2
 ---
 
 This is one of my first AngularJS 2 Component that I have to admit that I am
