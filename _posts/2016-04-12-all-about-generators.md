@@ -7,7 +7,8 @@ thumb: thumb-es6.png
 categories: 
 - blog
 - js
-- angularjs
+- es6
+- generators
 
 ---
 
