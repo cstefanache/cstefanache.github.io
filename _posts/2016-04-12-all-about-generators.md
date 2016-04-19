@@ -12,7 +12,7 @@ categories:
 
 ---
 
-# tl;dr #
+# tldr; #
 The basic idea of a generator is that you can pause and resume function 
 execution at any point in time. In order to define a generator function
 the * character is used to prefix the name or suffix the ```function``` 

@@ -17,7 +17,7 @@ doing any crazy actions. In Angular 1.5 we have more advanced component lifetime
 read in details in Pascal's blog here: [Exploring Angular 1.5: Lifecycle Hooks](http://blog.thoughtram.io/angularjs/2016/03/29/exploring-angular-1.5-lifecycle-hooks.html)
 
 
-## tl;dr ##
+## tldr; ##
 
 For those who are in a hurry, I embedded a video below with when each of the hook is executed based on the 
 current state of the component initialization or runtime. 
