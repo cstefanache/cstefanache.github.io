@@ -31,7 +31,7 @@ function *genFunc1() {
   return 3;
 }
 
-var generator = new genFunc1();
+var generator = genFunc1();
 console.log(generator.next())
 console.log(generator.next())
 console.log(generator.next())
@@ -108,7 +108,7 @@ function *genFunc1() {
   return 3;
 }
 
-var generator = new genFunc1();
+var generator = genFunc1();
 console.log(generator.next('Athos'))
 console.log(generator.next('Portos'))
 console.log(generator.next('Aramis'))
@@ -175,6 +175,8 @@ generators. The example is using generators to execute running functions
 and pauses from time to time to allow the browser to draw the DOM. 
 A huge advantage of this approach is that it is non-blocking. 
 
-Have Fun!
+**[Edit]** The blog post was updated by removing instantiation of generator function - Firefox throws an error: ```TypeError: genFunc1 is not a constructor```
+ - thanks to *senocular* for the notice on this [reddit](https://www.reddit.com/r/javascript/comments/4fg60s/all_about_javascript_generators_basics_working/) thread 
+
 
 <iframe src="https://embed.plnkr.co/Z1EY4pZ8DbizYIZO9yHN/" style="width: 100%; height: 300px"></iframe>

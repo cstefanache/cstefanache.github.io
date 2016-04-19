@@ -23,7 +23,7 @@ application can be tested [here][staticPage]). This is a simple application that
 AngularJS double binding functionality and how this is bootstrapped.
 
 HTML Code:
-{% highlight html %}
+~~~html
 <html>
 <head>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -50,7 +50,7 @@ HTML Code:
 </script>
 </html>
 
-{% endhighlight %}
+~~~
 
 
 Starting with this piece of code you can add on top of it the complexity you need to make you happy.

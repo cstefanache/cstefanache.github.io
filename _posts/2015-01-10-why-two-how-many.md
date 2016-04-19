@@ -16,30 +16,29 @@ as many times ad the iterator will identify no dirty flag set as true.
 For more details considering the following example:
 
 Template:
-{% highlight html %}
+~~~html
 
 <div>{% raw %}{{message}}{% endraw %}</div>
 <div>Processed message is: {% raw %}{{getProcessedMessage()}}{% endraw %}</div>
 <div>Fun stuff: {% raw %}{{funContent}}{% endraw %}</div>
 
-{% endhighlight %}
+~~~
 
 Controller:
-{% highlight js %}
+~~~javascript
  $scope.message = 'message';
 $scope.funContent = 'fun';
 $scope.getProcessedMessage = function() {
   return "("+$scope.message+")";
 }
-{% endhighlight %}
+~~~
 
 After a number of two digest cycles you will end up with the following (desired) output:
-{% highlight html %}
+~~~html
 message
 Processed message is: (message)
 Fun stuff: fun
-{% endhighlight html %}
-
+~~~
 
 For each DOM element that contains a binding to the AngularJS scope a new watcher will be
 registered in the $$watchers variable of the current $scope.
@@ -72,17 +71,17 @@ resulted evaluated values, all last and current values will be equal, marking th
 
 
 **Rendered output:**
-{% highlight html %}
+~~~html
 message
 Processed message is: (message)
 Fun stuff: fun
-{% endhighlight %}
+~~~
 
 ![Adding watcher](/resources/images/mintwo/iterations.gif)
 
 Consider changing the controller as follows:
 
-{% highlight js %}
+~~~javascript
 var a = 0;
 $scope.message = 'message';
 $scope.funContent = 'fun';
@@ -103,16 +102,16 @@ $scope.getProcessedMessage = function () {
 2 (message[2])
 3 message
 4 message
-{% endhighlight %}
+~~~
 
 
 Rendered page:
 
-{% highlight html %}
+~~~html
 message
 Processed message is: message
 Fun stuff: fun 1 2
-{% endhighlight %}
+~~~
 
 For this example, the initial digest cycle will be executed four times in order to render the page.  Since function
 execution will return a different output and also alters the value of the **funContent** scope variable,
@@ -153,10 +152,10 @@ the digest cycles will have to run multiple times in order to avoid display data
 If one of the function will return different value for each digest cycle evaluation, the process will stop after 11
 iterations with the infinite exception. Here is an example that will trigger an exception to be thrown:
 
-{% highlight js %}
+~~~javascript
  $scope.message = 'message';
 $scope.funContent = 'fun';
 $scope.getProcessedMessage = function() {
   return Math.random();
 }
-{% endhighlight %}
+~~~

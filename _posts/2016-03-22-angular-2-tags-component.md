@@ -26,7 +26,7 @@ Requirements:
 
 **The Code**
 
-{% highlight js %}
+```
 import {Component} from 'angular2/core';
 
 @Component({
@@ -118,18 +118,18 @@ export class Tags {
 
 }
 
-{% endhighlight %}
+```
 
 First of all let's import Component from  `angular2/core`
-{% highlight js %}
+```
 import {Component} from 'angular2/core';
-{% endhighlight %}
+```
 
 The next step is to define the component. The minimum amount of information that
 needs to be included for our component is to define *selector* and *template* attributes.
 Since the selector is defined as: '[tags]' it will enforce the usage as attribute of
 our component as such:
-{% highlight html %}<span [tags]="tagsArr"></span>{% endhighlight %}
+~~~html<span [tags]="tagsArr"></span>~~~
 
 The next step is to define the component template. All tags will be rendered as text
 list items (**li**) except for the last one (current edit) that will be rendered as a
@@ -144,7 +144,7 @@ or to pull out from the list the last tag and make it last editable one. The las
 listener that has to be added is to automatically add the current edit tag into the tag
 list when the input looses focus.
 
-{% highlight html %}
+~~~html
 <ul (click)="focus()">
   <li class="tag" *ngFor="#item of tags">{{item}}</li>
   <li class="tag nopadding">
@@ -154,7 +154,7 @@ list when the input looses focus.
            (blur)="blur()" />
   </li>
 </ul>
-{% endhighlight %}
+~~~
 
 In order to make our component reusable we need to define a input parameter that
 will receive a reference to a data model from the parent: *inputs: ['tags']*.
@@ -178,7 +178,7 @@ current edit to the list of tags or 8 (Backspace) in order to pop the last eleme
 from the list and make it as current edit (if current is empty).
 + *blur* - adds the current edit (if not empty) to the array list
 
-{% highlight js %}
+```
 export class Tags {
 
   tags:Array<String>;
@@ -213,4 +213,4 @@ export class Tags {
 
 
 }
-{% endhighlight %}
+```
