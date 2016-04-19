@@ -142,7 +142,7 @@ of the wonder of Promises.
 ~~~javascript
 
 function doRequest(url) {
-    return ajaxCall( url, function(response){
+    ajaxCall( url, function(response){
         it.next( response );
     });
 }
