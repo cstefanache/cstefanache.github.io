@@ -2,6 +2,7 @@
 
 # Site settings
 title: myRightToCode
+name: myRightToCode
 description: "My Right To Code"
 analytics: #Google analytics code in the format XX-nnnnnnnn-n
 baseurl: "" #important: start with /
