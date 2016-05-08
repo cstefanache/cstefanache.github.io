@@ -50,8 +50,8 @@ Using this solution, if the application is provided by a portal,
 where usually header and footer are provided by the server the transition will be more seamless. 
 
 In order to solve data passing from one app to the other problem, 
-a global variable defined outside Angular context can be used in order 
-to store and load info when one application is changed to the other.
+a global variable defined outside Angular context can be used for storing and loading
+info when one application is changed to the other.
 
 Using this approach, in a development environment, the login application will load in approx 400ms (see image below).
 
