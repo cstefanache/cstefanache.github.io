@@ -19,7 +19,7 @@ is DynamicComponentLoader, not as flashy as its big brother
 but is doing its job in a safer manor. 
 
 # tldr; #
-Here is a plnkr example using DynamicComponentLoader (loadNextToLocation) in Angular 2.0.0 RC1:
+Here is a plnkr example using DynamicComponentLoader (Angular 2.0.0 RC1):
 
  + `loader.ts` holds the loading logic
  + `components.ts` holds the components that will be loaded dynamically
