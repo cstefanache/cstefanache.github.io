@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "$compile is dead! Long live DynamicComponentBuilder"
+title:  "$compile is dead! Long live DynamicComponentLoader"
 date:   2016-05-12 16:00
 img: angular2-generic.png
 thumb: mrc-angular2.png
@@ -15,7 +15,7 @@ categories:
 The $compile service had always been the gem of Angular 1. It was like
 the party trick that allowed you to wow people and offer you the possibility
 to render anything, at any time and somehow safe. The $compile alternative in Angular 2 
-is DynamicComponentBuilder, not as flashy as its big brother 
+is DynamicComponentLoader, not as flashy as its big brother 
 but is doing its job in a safer manor. 
 
 # tldr; #
