@@ -25,7 +25,7 @@ Here is a plnkr example using DynamicComponentLoader (Angular 2.0.0 RC1):
  + `components.ts` holds the components that will be loaded dynamically
  + `app.ts` holds the logic and the container for component loading 
 
-<iframe src="https://embed.plnkr.co/LoZbInkkrjBIu65rZySv/" style="width: 100%; height: 400px"></iframe>
+<iframe src="https://embed.plnkr.co/ZM2wSc/" style="width: 100%; height: 400px"></iframe>
 
 
 # DynamicComponentLoader #
