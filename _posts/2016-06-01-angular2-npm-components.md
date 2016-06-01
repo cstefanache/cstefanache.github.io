@@ -16,7 +16,7 @@ categories:
 
 If you worked in the past few years on projects using Angular 1.x, 
 you might have noticed that not all components that are published on
-**npm** are not always the best. They might have performance issues,
+**npm** are always the best. They might have performance issues,
 are buggy or incomplete. Well, now is your chance - start creating
 your AngularJS 2.x components. This blog post is presenting a step
 by step guideline on how to create npm-ready components for Angular 2
