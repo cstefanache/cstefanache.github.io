@@ -29,6 +29,8 @@ colors:  #in hex code if not noted else
 social:
   - title: twitter
     url: https://twitter.com/_cstefanache
+  - title: envelope
+    url: mailto:cornel.stefanache@gmail.com
 
 email: cornel.stefanache@gmail.com
 tel: +40741094841
