@@ -96,13 +96,13 @@ function Style(value) {
 }
 ```
 
-Well thing got trickier when I needed to access Angular 2 metadata information. 
+Well, things got trickier when I needed to access Angular 2 metadata information:
 
 **First Problem** I had to dig into Angular2 code in order to understand that the annotations are parsed bottom up. 
 So, the solution that is presented here requires that the annotation to be defined before the @Component or @Directive annotation so you can have access to it.
 
-**Second Problem** You need to access window.Reflect object in order to do the magic and Angular2 will offer you a different one.
-For this problem I had to access window reflect functionality in order to access constructor metadata (@Constructor) information.
+**Second Problem** You need to access **window.Reflect** object in order to do the magic and Angular2 will offer you a different one.
+The solution for this problem is to try to take the **Reflect** object directly from window object.
 
 ```
  function Style(value) {
@@ -129,7 +129,7 @@ For this problem I had to access window reflect functionality in order to access
  }
 ```
 
-Since our decorator is placed before @Component annotation, when the returned function, of our custom annotation, will be executed, the constructor will already be populated with the info provided by @Component decorator.
+Since our decorator is placed before @Component annotation when the returned function, of our custom annotation, will be executed, the constructor will already be populated with the info provided by @Component decorator.
 At this point you can access, update or replace what is already defined in any of the @Component attributes with your custom property value. Since Angular 2 is processing all annotations before instantiating the component there is no risk of not having the custom logic executed.
 
 That's it. This is the whole magic for creating your custom Angular 2 @Decorators.
