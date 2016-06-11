@@ -71,7 +71,7 @@ Here is a plnkr with the working solution:
 <iframe src="http://embed.plnkr.co/gR61tCQl0EA40i0Ze6uY/" style="width: 100%; height: 300px"></iframe>
 
 The advantage of this solution is that you can use javascript functions and variables as CSS attribute values so you can customize your component from javascript logic.
-There was the possibility to use typescript string literals {{color}} to achieve the same javascript values customizations but I would loose the style nesting generation.
+There was the possibility to use typescript string literals {{color}} to achieve the same javascript values customizations but I would lose the style nesting generation.
 The example above will generate:
 
 ```
