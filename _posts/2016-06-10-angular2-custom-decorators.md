@@ -14,7 +14,7 @@ categories:
 # The Problem #
 Angular 2 decorators are a great way to define the component/directive blueprint and a good way to understand the basic functionality of your logic in few lines of descriptive code.
 One big problem that I see with them is that they are quite sealed - I did not manage to find a way to extend their functionality.
-I really like the descriptive mode of ReactJS component styles and the hierarchical way LESS/SAAS is doing. I wanted the same thing in Angular 2 but I did not find a way to extend the styles @Component attribute to do so.
+I really like the descriptive mode of ReactJS component styles and the hierarchical way LESS/SASS is doing. I wanted the same thing in Angular 2 but I did not find a way to extend the styles @Component attribute to do so.
 If there is another way to do it please leave a reply in the messages box at the bottom of the page.
 The post is covering the way I managed to achieve the desired functionality using a custom decorator for styles attribute but it can be used for many purposes.
 
