@@ -51,6 +51,56 @@ locally your developed application.
  
 ```
 
+## Compilation erros fix ##
+
+There are two major problems with packaging your component:
+
+1. Duplicate identifier error.
+
+When importing a new dependency you might get the following exception:
+
+```
+/node_modules/[some_lib]_/typings/browser/ambient/es6-shim/index.d.ts(8,14): error TS2300: Duplicate identifier 'PropertyKey'.
+/node_modules/[some_lib]/typings/browser/ambient/es6-shim/index.d.ts(11,5): error TS2300: Duplicate identifier 'done'.
+/node_modules/[some_lib]/typings/browser/ambient/es6-shim/index.d.ts(12,5): error TS2300: Duplicate identifier 'value'.
+/node_modules/[some_lib]/typings/browser/ambient/es6-shim/index.d.ts(250,5): error TS2300: Duplicate identifier 'EPSILON'.
+/node_modules/[some_lib]/typings/browser/ambient/es6-shim/index.d.ts(285,5): error TS2300: Duplicate identifier 'MAX_SAFE_INTEGER'.
+```
+
+This is triggered because the folder **typings** exist in the imported library and the *.d.ts* file used contains:
+
+```
+///<reference path="../typings/browser.d.ts"/>
+```
+
+Since using a **<reference>** tag is considered a bad practice then you should remove the tag everywhere used in your code.
+After removing you might fall into the second problem:
+
+2. Missing definitions.
+Since angular is no longer using reference tag and removed the typings locally then the following error occur:
+
+```
+node_modules/@angular/core/src/application_ref.d.ts(39,88): error TS2304: Cannot find name 'Promise'.
+node_modules/@angular/core/src/change_detection/differs/default_keyvalue_differ.d.ts(24,15): error TS2304: Cannot find name 'Map'.
+node_modules/@angular/core/src/di/reflective_provider.d.ts(105,165): error TS2304: Cannot find name 'Map'.
+node_modules/@angular/core/src/facade/collection.d.ts(1,25): error TS2304: Cannot find name 'MapConstructor'.
+node_modules/@angular/core/src/facade/lang.d.ts(5,17): error TS2304: Cannot find name 'Set'.
+...
+```
+
+This means that you should include the ambient typings at compilation. This can be achieved by setting the files
+attribute in your tsconfig.json file to point to local ambient browser defs:
+
+```
+...
+"files": [
+    "typings/browser.d.ts"
+  ],
+...
+```
+
+
+
 ### src/ngGeneric.ts ###
 
 This is the root file for your component that you want to be published.
@@ -58,8 +108,10 @@ The example below is creating a component that displays the text
 *Hello World Component* inside a **<h4>** when used. If your logic need 
 no DOM element creation consider creating directives instead.
 
+
+
+
 ```
-///<reference path="../typings/browser.d.ts"/>
 import {Component} from '@angular/core';
 
 @Component({
@@ -174,6 +226,7 @@ file in order to keep the library to a bare minimum.
 ```
 {
   "compilerOptions": {
+    "removeComments": true,
     "noImplicitAny": false,
     "module": "commonjs",
     "target": "es5",
@@ -185,13 +238,14 @@ file in order to keep the library to a bare minimum.
     "rootDir": "."
   },
   "files": [
-    "index.ts"
+    "typings/browser.d.ts"
   ],
   "exclude": [
     "node_modules",
     "dist",
     "runtime",
-    "typings"
+    "typings/main",
+    "typings/main.d.ts"
   ]
 }
 ```
