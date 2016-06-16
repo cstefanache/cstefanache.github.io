@@ -73,7 +73,7 @@ This is triggered because the folder **typings** exist in the imported library a
 ///<reference path="../typings/browser.d.ts"/>
 ```
 
-Since using a **<reference>** tag is considered a bad practice then you should remove the tag everywhere used in your code.
+Since using a **\<reference\>** tag is considered a bad practice then you should remove the tag everywhere used in your code.
 After removing you might fall into the second problem:
 
 2. Missing definitions.
