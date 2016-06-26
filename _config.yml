@@ -1,8 +1,8 @@
 ### GENERAL SETTINGS ###
 
 # Site settings
-title: myRightToCode
-name: myRightToCode
+title: My Right To Code
+name: My Right To Code
 description: "My Right To Code"
 analytics: #Google analytics code in the format XX-nnnnnnnn-n
 baseurl: "" #important: start with /
