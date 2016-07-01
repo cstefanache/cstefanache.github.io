@@ -93,6 +93,10 @@ a:focus {
 	margin-bottom: 0px;
 }
 
+.navbar .navbar-right {
+	margin-right: -15px;
+}
+
 .navbar-brand {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 300;

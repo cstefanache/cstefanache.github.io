@@ -11,34 +11,37 @@ categories:
 ---
 The digest cycle is responsible for rendering the view based on template scope and controller logic. AngularJS digest
 cycle will be executed once an event was triggered on the page or at a specified time interval. The cycle will be ran
-as many times ad the iterator will identify no dirty flag set as true.
+as many times ad the iterator will identify no dirty flag set as true. Actually what AngularJS does is to run all 
+watchers without any rendering until every scope is clear and ready to be displayed without inconsistencies.
 
 For more details considering the following example:
 
 Template:
-~~~html
+```html
 
-<div>{% raw %}{{message}}{% endraw %}</div>
+<div>{% raw %}{{ message }}{% endraw %}</div>
 <div>Processed message is: {% raw %}{{getProcessedMessage()}}{% endraw %}</div>
 <div>Fun stuff: {% raw %}{{funContent}}{% endraw %}</div>
 
-~~~
+```
 
 Controller:
-~~~javascript
+
+```javascript
  $scope.message = 'message';
 $scope.funContent = 'fun';
 $scope.getProcessedMessage = function() {
   return "("+$scope.message+")";
 }
-~~~
+```
 
 After a number of two digest cycles you will end up with the following (desired) output:
-~~~html
+
+```html
 message
 Processed message is: (message)
 Fun stuff: fun
-~~~
+```
 
 For each DOM element that contains a binding to the AngularJS scope a new watcher will be
 registered in the $$watchers variable of the current $scope.
@@ -71,17 +74,17 @@ resulted evaluated values, all last and current values will be equal, marking th
 
 
 **Rendered output:**
-~~~html
+```html
 message
 Processed message is: (message)
 Fun stuff: fun
-~~~
+```
 
 ![Adding watcher](/resources/images/mintwo/iterations.gif)
 
 Consider changing the controller as follows:
 
-~~~javascript
+```javascript
 var a = 0;
 $scope.message = 'message';
 $scope.funContent = 'fun';
@@ -102,16 +105,16 @@ $scope.getProcessedMessage = function () {
 2 (message[2])
 3 message
 4 message
-~~~
+```
 
 
 Rendered page:
 
-~~~html
+```html
 message
 Processed message is: message
 Fun stuff: fun 1 2
-~~~
+```
 
 For this example, the initial digest cycle will be executed four times in order to render the page.  Since function
 execution will return a different output and also alters the value of the **funContent** scope variable,
@@ -152,10 +155,10 @@ the digest cycles will have to run multiple times in order to avoid display data
 If one of the function will return different value for each digest cycle evaluation, the process will stop after 11
 iterations with the infinite exception. Here is an example that will trigger an exception to be thrown:
 
-~~~javascript
+```javascript
  $scope.message = 'message';
 $scope.funContent = 'fun';
 $scope.getProcessedMessage = function() {
   return Math.random();
 }
-~~~
+```

@@ -5,33 +5,46 @@ permalink: /
 ---
 
 <div class="container mtb">
-    <div class="row">
-        <div class="col-md-9">
-            <h4>Latest Post</h4>
-            <div class="hline"></div>
-            {% for post in site.categories['blog'] limit:1 %}
-            <! -- Blog Post -->
-            <a href="{{ post.url | prepend: site.baseurl }}">
-                <img class="img-responsive" src="{{ "/assets/img/blog/" | prepend: site.baseurl }}{{ post.img }}">
-            </a>
-            <a href="{{ post.url | prepend: site.baseurl }}"><h3 class="ctitle">{{ post.title }}</h3></a>
-            <p><csmall>{{ post.date | date: "%b %-d, %Y" }}.</csmall></p>
-            {{ post.excerpt }}
-            <p><a href="{{ post.url | prepend: site.baseurl }}">[Read More]</a></p>
-            <div class="hline"></div>
 
-            <div class="spacing"></div>
-            {% endfor %}
-        </div>
-        <div class="col-md-3">
-            <h4>Archive</h4>
-            <div class="hline"></div>
-            {% for post in site.categories['blog'] limit:5 %}
-                <h4><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}.</a></h4>
-            {% endfor %}
-        </div>
+    <h2 class="text-center">Latest Posts</h2>
+
+    <hr>
 
 
+    <! -- BLOG POSTS LIST -->
 
-    </div><! --/row -->
+    {% for post in site.categories['blog'] limit: 60 %}
+
+            <span class="col-xs-12">
+                <div class="text-center">
+                    <a href="{{ post.url }}">
+                        <h1 class="hidden-xs">
+                            {{ post.title }}
+                        </h1>
+                        <h3 class="visible-xs">
+                            {{ post.title }}
+                        </h3>
+                    </a>
+
+                    {% for category in post.categories %}{% unless category == "blog" %}
+                    <span class="badge" style="text-transform: capitalize;">{{category}}</span>
+                    {% endunless %}{% endfor %}
+                    <div>Posted on {{ post.date | date_to_string }}</div>
+                </div>
+
+                    <p>
+                        {{ post.excerpt | truncatewords:50}}
+
+                    </p>
+                <div class="text-center">
+                    <a href="{{ post.url }}" class="btn btn-info">Read more</a>
+                </div>
+                <hr>
+            </span>
+
+
+    {% endfor %}
+
+
+    <! --/row -->
 </div><! --/container -->
