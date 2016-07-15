@@ -33,7 +33,7 @@ import {Component} from 'angular2/core';
    selector: '[tags]',
    template: `
     <ul (click)="focus()">
-      <li class="tag" *ngFor="#item of tags">{{item}}</li>
+      <li class="tag" *ngFor="#item of tags">{% raw %}{{item}}{% endraw %}</li>
       <li class="tag nopadding">
         <input id="tagInput"
                [(ngModel)]="current"
