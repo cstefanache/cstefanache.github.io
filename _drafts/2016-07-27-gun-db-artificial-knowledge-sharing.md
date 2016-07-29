@@ -53,6 +53,175 @@ Here is the same optimization problem that takes advantage of GunDB global knowl
 
 # How it works #
 
+With each iteration the entire swarm migrates towards the best individuals location. With movement, each particle gains momentum that, will allow the particle to move further than the target point due to inertia. 
+The inertia allows the algorithm to prevent premature convergence to a local best area rather than the global one. 
+<div style="text-align:center">
+    <svg style="border: 1px solid #000" id="attractor" width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+     <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+     <g>
+      <title>background</title>
+      <rect fill="#fff" id="canvas_background" height="202" width="322" y="-1" x="-1"/>
+      <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+       <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+      </g>
+     </g>
+     <g >
+      <title>Layer 1</title>            
+      
+     </g>
+    </svg>
+    <button id="restart">Restart</button>
+    <button id="start">Start</button>
+    <button id="step">Step</button>
+</div>
+<script>
+var omega = 0.85;
+var c1 = 0.1;
+var c2 = 0.1;
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+   var block = false;
+    var toX = Math.round(Math.random() * 300);
+    var toY =  Math.round(Math.random() * 300);
+    var interval;
+
+
+    var attractor = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse'); //Create a path in SVG's namespace
+    
+    attractor.style.strokeWidth = "1px"; //Set stroke width
+    attractor.setAttribute('cx', toX);
+    attractor.setAttribute('cy', toY);
+    attractor.setAttribute('velX', 0);
+    attractor.setAttribute('velY', 0);
+    attractor.setAttribute('stroke', '#000000');
+    attractor.setAttribute('fill', '#FFFFFF');
+    attractor.setAttribute('rx', 10);
+    attractor.setAttribute('ry', 10);
+    document.getElementById('attractor').appendChild(attractor);
+
+    var refs = [];
+    for (var i = 0; i < 10; i++) {
+
+        var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse'); //Create a path in SVG's namespace
+        // newElement.style.stroke = "#000"; //Set stroke colour
+        newElement.style.strokeWidth = "1px"; //Set stroke width
+        newElement.setAttribute('cx', Math.round(Math.random() * 300));
+        newElement.setAttribute('cy', Math.round(Math.random() * 300));
+        newElement.setAttribute('velX', 0);
+        newElement.setAttribute('velY', 0);
+        newElement.setAttribute('fill', '#FF0000');
+        newElement.setAttribute('stroke', '#000000');
+
+
+        newElement.setAttribute('rx', 3);
+        newElement.setAttribute('ry', 3);
+        document.getElementById('attractor').appendChild(newElement);
+
+        refs.push(newElement);
+    }
+
+ 
+    $("#step").click(function() {
+        step();
+    });
+
+    $("#restart").click(function () {
+        block = false;
+        clearInterval(interval);
+        for (var i = 0; i < refs.length; i++) {
+            elem = refs[i];
+            var cx = Math.round(Math.random() * 300);
+            var cy = Math.round(Math.random() * 300);
+            elem.setAttribute('cx', cx);
+            elem.setAttribute('pbx', cx);
+
+            elem.setAttribute('cy', cy);
+            elem.setAttribute('pby', cy);
+
+            elem.setAttribute('velX', 0);
+            elem.setAttribute('velY', 0);
+        }
+    });
+
+
+    function step() {
+
+        var who = 0;
+        var opt = 1e12;
+
+        for (var i = 0; i < refs.length; i++) {
+            var elem = refs[i];
+            var localX = Number(elem.getAttribute('cx'));
+            var localY = Number(elem.getAttribute('cy'));
+            var pbVal = Number(elem.getAttribute('val'));
+            var val =
+                Math.abs(toX - localX) * Math.abs(toX - localX) +
+                Math.abs(toY - localY) * Math.abs(toY - localY);
+
+            if (pbVal < val) {
+                elem.setAttribute('pbx', localX);
+                elem.setAttribute('pby', localY);
+            }
+
+            elem.setAttribute('fill', '#FF0000');
+            elem.setAttribute('stroke', '#000000');
+
+
+            if (val < opt) {
+                opt = val;
+                who = i;
+            }
+        }
+
+        var bestX = Number(refs[who].getAttribute('cx'));
+        var bestY = Number(refs[who].getAttribute('cy'));
+
+        refs[who].setAttribute('fill', '#00FF00');
+        refs[who].setAttribute('stroke', '#00FF00');
+
+        for (var i = 0; i < refs.length; i++) {
+
+            var elem = refs[i];
+            var localX = Number(elem.getAttribute('cx'));
+            var localY = Number(elem.getAttribute('cy'));
+            var velX = Number(elem.getAttribute('velX'));
+            var velY = Number(elem.getAttribute('velY'));
+            var pbestX = Number(elem.getAttribute('pbx'));
+            var pbestY = Number(elem.getAttribute('pby'));
+
+            velX = omega * velX + (c1 * Math.random() * (pbestX - localX)) + (c2 * Math.random() * (bestX - localX));
+            velY = omega * velY + (c1 * Math.random() * (pbestY - localY)) + (c2 * Math.random() * (bestY - localY));
+
+            elem.setAttribute('velX', velX);
+            elem.setAttribute('velY', velY);
+
+            elem.setAttribute('cx', localX + velX);
+            elem.setAttribute('cy', localY + velY);
+
+        }
+    }
+
+
+    $('#attractor').click(function (event) {
+       
+        toX = event.offsetX;
+        toY = event.offsetY;
+        attractor.setAttribute('cx', toX);
+        attractor.setAttribute('cy', toY);
+       
+    });
+    
+    $("#start").click(function() {
+      interval = setInterval(function () {
+            step();
+        }, 100);
+    });
+
+});
+
+    
+</script>
 ## Gun Integration ##
 
 In order to have everything in sync a GUN server connection must be established.
