@@ -32,7 +32,7 @@ The rise of machine learning allowed computers the ability to learn specialized 
 Here is a sample of classic particle swarm optimization, where the entire swarm learn where the optimum (*best feeding area*) is located.
 Just click on **Start** button and see how multiple swarms converge to their belief of best area. The algorithm used is a slowed down classic Particle Swarm algorithm.
 
-<!--<iframe src="https://run.plnkr.co/plunks/SOd9dC/" style="width: 100%; height: 400px"></iframe>-->
+<iframe src="https://run.plnkr.co/plunks/SOd9dC/" style="width: 100%; height: 400px"></iframe>
 
 If you start tinkering with the population size and *reset* the evolution, you will notice that for large population sizes **>500** the swarm will converge to the same point almost everytime.
 When using small sized swarms 10 to 40, the swarms will converge in different points because there is not enough *knowledge* about the surroundings to atract the particles.
@@ -242,7 +242,7 @@ At that point I was able to use multiple processing units, independent of time, 
 Another huge advantage was that I was able to run the same search with multiple algorithms: Particle Swarm, Genetic Algorithm etc. and use each one's advantage at the same time.
 
 Here is the same optimization problem that takes advantage of GunDB global knowledge:
-<!--<iframe src="https://run.plnkr.co/plunks/0sUJjo/" style="width: 100%; height: 400px"></iframe>-->
+<iframe src="https://run.plnkr.co/plunks/0sUJjo/" style="width: 100%; height: 400px"></iframe>
 
 ## Gun Integration ##
 
