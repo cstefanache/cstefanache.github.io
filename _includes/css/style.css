@@ -35,8 +35,24 @@ p {
 	text-align: justify;
 	color: {{ site.colors.secondary }};
 	margin-top: 10px;
+
 }
 
+button {
+	border: 1px solid {{ site.colors.primary }};
+	border-radius: 2px;
+	background-color: #FFFFFF;
+	padding: 3px;
+	transition: background-color .4s linear, color .4s linear;
+}
+
+
+
+button:hover,
+button:active {
+	color: #FFFFFF;
+	background-color: {{ site.colors.primary }};
+}
 img {
 	height: auto;
 	max-width: 100%;

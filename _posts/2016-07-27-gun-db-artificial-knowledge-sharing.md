@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Distributed Machine Learning using GunDB"
-date:   2016-06-27 10:00
+date:   2016-08-02 10:00
 img: art-inf-generic.png
 thumb: mrc-css.png
 categories: 
@@ -20,12 +20,16 @@ I just realized that there are a lot of use cases where this type of storage cou
 With the rise of mobile devices and 'mobile first' being a standard, a new requirement rise to challenge the frontend developers: **offline first**.
 
 GunDB is a realtime database of data synchronization - this means that you will no longer have to care about data management on unreliable connection.
-Everybody is doing it: Google with docs and email drafts, Microsoft online word editor and basically every application that runs as a Chrome APP - so why shouldn't you do it as well?
+Everybody is doing it: Google with docs and email drafts, Microsoft online word editor and basically every application that support offline first - so why shouldn't you do it as well?
+All you have to do when using it is to sit back, relax, manipulate the data and let Gun do the syncing work for you. One major advantage of Gun, that I exploited to the maximum, is the ability to notify on data change. 
+This feature is a life-saver when it comes to realtime data rendering, notification and decision making.
+
+If you are not interested in machine learning and you are here only to see how GunDB works, jump to the interactive demo on "How it works" and demo Plunker on "GunDB in Artificial Intelligence".
 
 # The birds and the bees of Machine Learning #
 
 The rise of machine learning allowed computers the ability to learn specialized tasks without being preprogrammed to do it. 
-Here is a sample of classic particle swarm optimization, where the entire swarm learn where the optimum - *best feeding area* is located.
+Here is a sample of classic particle swarm optimization, where the entire swarm learn where the optimum (*best feeding area*) is located.
 Just click on **Start** button and see how multiple swarms converge to their belief of best area. The algorithm used is a slowed down classic Particle Swarm algorithm.
 
 <!--<iframe src="https://run.plnkr.co/plunks/SOd9dC/" style="width: 100%; height: 400px"></iframe>-->
@@ -34,27 +38,28 @@ If you start tinkering with the population size and *reset* the evolution, you w
 When using small sized swarms 10 to 40, the swarms will converge in different points because there is not enough *knowledge* about the surroundings to atract the particles.
 
 
-NP-Hard problems usually have a huge searching area that exhaustive searches are not an option. 
+NP-Hard problems usually have a huge searching area and exhaustive searches are not an option. 
 The problem presented above is a classical benchmark problem: Schwefel, used in evaluating performance of optimization algorithms (particle swarm, genetic, simmulated annealing etc.).
-The problem has a 2D searching space where the minimum (best feeding area) is located in the top left corner. With each move, the particles objective function must be recalculated to check if it located a better feeding area than previously visited - In our case a smaller Schwefel function value.
-In this case the evaluation is rather fast and we can work with large population sizes on a single computer.
+The problem has a 2D searching space where the minimum (best feeding area) is located in the top left corner. 
+With every position change, each particle must be re-evaluated to check if they have a better value than previous or than globally known one  - In our case a smaller Schwefel function value.
 
-In real case scenarios - such as evaluation of natural language in parsing texts or voice transcripts - this evaluation is rather costly and requires a huge amount of processing power in order to be performed.
-In order to evaluate, tweak and understand how such algorithm performs on process intensive problems, small population of swarms are using reducing the chance of introducing diversity within the searching space.
+<img class="img-responsive" src="{{ '/assets/img/schwefel-normalized.png'}}">
+<div class="text-center">Schwefel function representation</div>
 
-# GunDB in Artificial Intelligence #
-
-Usually when I ran costly optimizations, I was beginning my day with setting up a large population over a large searching space, hit **Start** button and carry on with usual activities during the day and interpreted the results the next morning.
-Using GunDB within this type of applications was a life-changer for me. I was able to run an optimization on my home desktop computer, go to the office, start another one on my mobile and laptop and see how the miracle of collective knowledge behaves.
-At that point I was able to use three different processing units, independent of time, space, internet connection etc. If my mobile would loose the connection for 5 minutes, at the point of reconnect, GunDB was able to sync to *global knowledge*
-
-Here is the same optimization problem that takes advantage of GunDB global knowledge:
-<!--<iframe src="https://run.plnkr.co/plunks/0sUJjo/" style="width: 100%; height: 400px"></iframe>-->
+On NP-Hard problems - such as evaluation of natural language in parsing texts or voice transcripts - this evaluation is rather costly and requires a huge amount of processing power.
+In order to evaluate, tweak and understand how such algorithm performs on process intensive problems, small population of swarms are used, reducing the chance of introducing diversity within the searching space.
 
 # How it works #
 
-With each iteration the entire swarm migrates towards the best individuals location. With movement, each particle gains momentum that, will allow the particle to move further than the target point due to inertia. 
-The inertia allows the algorithm to prevent premature convergence to a local best area rather than the global one. 
+With each iteration the entire swarm migrates towards the location of the best particle (in this example, the best particle is one closest to the black circle - click to move).
+With movement, each particle gains momentum that will allow it to move further than the target point due to inertia. 
+This inertia offers the chance to search for a better space further than the current global best particle. 
+In order to fully understand how the swarm is behaving you can use the simulator below. 
+Just click anywhere in the sandbox to set the global best and click on **Start** button to allow the particles to start searching the area.
+After most of the particles lost momentum change the location of the global best by clicking in another region of the sandbox.
+You will notice that since the particles will no longer swarm towards the global best due to the lost momentum.
+Now click on **Random Particle** button and see how a newly inserted individual will affect the swarm.
+
 <div style="text-align:center">
     <svg style="border: 1px solid #000" id="attractor" width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
      <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
@@ -70,9 +75,12 @@ The inertia allows the algorithm to prevent premature convergence to a local bes
       
      </g>
     </svg>
+    
     <button id="restart">Restart</button>
     <button id="start">Start</button>
     <button id="step">Step</button>
+    <button id="random">Random Particle</button>
+   
 </div>
 <script>
 var omega = 0.85;
@@ -81,12 +89,9 @@ var c2 = 0.1;
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-   var block = false;
     var toX = Math.round(Math.random() * 300);
     var toY =  Math.round(Math.random() * 300);
-    var interval;
-
-
+  
     var attractor = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse'); //Create a path in SVG's namespace
     
     attractor.style.strokeWidth = "1px"; //Set stroke width
@@ -99,10 +104,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     attractor.setAttribute('rx', 10);
     attractor.setAttribute('ry', 10);
     document.getElementById('attractor').appendChild(attractor);
-
-    var refs = [];
-    for (var i = 0; i < 10; i++) {
-
+    
+    function addRandom() {
         var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse'); //Create a path in SVG's namespace
         // newElement.style.stroke = "#000"; //Set stroke colour
         newElement.style.strokeWidth = "1px"; //Set stroke width
@@ -121,29 +124,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         refs.push(newElement);
     }
 
- 
-    $("#step").click(function() {
-        step();
-    });
-
-    $("#restart").click(function () {
-        block = false;
-        clearInterval(interval);
-        for (var i = 0; i < refs.length; i++) {
-            elem = refs[i];
-            var cx = Math.round(Math.random() * 300);
-            var cy = Math.round(Math.random() * 300);
-            elem.setAttribute('cx', cx);
-            elem.setAttribute('pbx', cx);
-
-            elem.setAttribute('cy', cy);
-            elem.setAttribute('pby', cy);
-
-            elem.setAttribute('velX', 0);
-            elem.setAttribute('velY', 0);
-        }
-    });
-
+    var refs = [];
+    for (var i = 0; i < 10; i++) {
+        addRandom();
+    }
 
     function step() {
 
@@ -213,22 +197,59 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
     
     $("#start").click(function() {
-      interval = setInterval(function () {
+      window.optInterval = setInterval(function () {
             step();
         }, 100);
     });
+    
+    $("#step").click(function() {
+        clearInterval(window.optInterval);
+        step();
+    });
+    
+    $("#random").click(function() {
+        addRandom();
+    });
+    
+    $("#restart").click(function () {
+        clearInterval(window.optInterval);
+        for (var i = 0; i < refs.length; i++) {
+            elem = refs[i];
+            var cx = Math.round(Math.random() * 300);
+            var cy = Math.round(Math.random() * 300);
+            elem.setAttribute('cx', cx);
+            elem.setAttribute('pbx', cx);
+
+            elem.setAttribute('cy', cy);
+            elem.setAttribute('pby', cy);
+
+            elem.setAttribute('velX', 0);
+            elem.setAttribute('velY', 0);
+        }
+    });
 
 });
-
-    
 </script>
+
+The role of GunDB in this process is the be the global archive of best individuals, notify the algorithm about a new global best and drive all the distributed swarms.
+
+
+# GunDB in Artificial Intelligence #
+
+Usually when I ran costly optimizations, I was beginning my day with setting up a large population over a large searching space, hit **Start** button and carry on with usual activities during the day and interpreted the results the next morning.
+Using GunDB within this type of applications was a life-changer for me. I was able to run an optimization on my home desktop computer, go to the office, start another one on my mobile and laptop and see how the miracle of collective knowledge behaves.
+At that point I was able to use multiple processing units, independent of time, space, internet connection etc. If my mobile would loose the connection for 5 minutes, at the point of reconnect, GunDB was able to sync to *global knowledge*
+Another huge advantage was that I was able to run the same search with multiple algorithms: Particle Swarm, Genetic Algorithm etc. and use each one's advantage at the same time.
+
+Here is the same optimization problem that takes advantage of GunDB global knowledge:
+<!--<iframe src="https://run.plnkr.co/plunks/0sUJjo/" style="width: 100%; height: 400px"></iframe>-->
+
 ## Gun Integration ##
 
-In order to have everything in sync a GUN server connection must be established.
-For this Gun has a really easy way to do it. *Even though the server is not ready, every change will be performed on users local storage and sync on connect*
+In order to have everything in sync a Gun server connection must be established.
+*Even though the server is not ready, every change will be performed on users local storage and sync on connect*
 
 For better organization, all the data related to the searching algorithm will be stored at *optimisations* key. 
-Even though the connection was not already established, when reading the optimisations key a new reference will be created on the local storage that will sync with the server at a later point in time.
 
 ```javascript
 var gun = Gun('https://node-myrighttocode.rhcloud.com:8443/gun'),
@@ -284,3 +305,18 @@ If the current local best value is better than global one, the local individual 
 
 ```
 
+## Gun API ##
+
+I took the liberty to copy the gun api documentation from the website in order to show the simplicity of interacting with GunDB.
+Every method in the API is natural, self explanatory but powerful when it comes to sync. 
+
+- **constructor**: *var gun = Gun(options)* - Used to creates a new gun database instance;
+- **gun.put(data, callback)**: Used to creates a new gun database instance;
+- **gun.key(name)**: Used to index data for faster searches;
+- **gun.get(name)**: Load all data under a key into the context;
+- **gun.path(property)**: Navigate through a node’s properties;
+- **gun.back**: Move up to the parent context on the chain;
+- **gun.on(callback)**: Subscribe to updates changes on a node or property real-time;
+- **gun.map(callback)**: Loop over each property in a node, and subscribe to future changes;
+- **gun.val(callback)**: Read a full object without subscribing updates;
+- **gun.not(callback)**: Handle cases where data can’t be found.
