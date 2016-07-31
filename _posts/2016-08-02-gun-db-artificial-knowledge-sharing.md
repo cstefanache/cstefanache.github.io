@@ -16,32 +16,31 @@ categories:
 # GunDB #
 
 Sometime ago I came across  **[GunDB](http://gun.js.org/enterprise/)** and, after skimming through the documentation and source code,
-I just realized that there are a lot of use cases where this type of storage could solve my problems. 
+I realized that there are a lot of use cases where this type of storage could solve my problems. 
 With the rise of mobile devices and 'mobile first' being a standard, a new requirement rise to challenge the frontend developers: **offline first**.
 
-GunDB is a realtime database of data synchronization - this means that you will no longer have to care about data management on unreliable connection.
-Everybody is doing it: Google with docs and email drafts, Microsoft online word editor and basically every application that support offline first - so why shouldn't you do it as well?
-All you have to is use it, sit back, relax, manipulate the data and let Gun do the syncing work for you. One major advantage of Gun, that I exploited to the maximum, is the ability to notify on data change. 
-This feature is a life-saver when it comes to realtime data rendering, notification and decision making.
+GunDB is a realtime database of data synchronization - this means that you will no longer have to care about data management on unreliable connections.
+Everybody is doing it: Google with docs and email drafts, Microsoft online word editor and basically every application that supports offline first - so why shouldn't you do it as well?
+Just sit back, relax and let Gun do the syncing work for you. One major advantage of Gun, that I like to use a lot, is the ability to notify on data change. 
+This feature is a life-saver when it comes to realtime data rendering, notifications and decision making.
 
-If you are not interested in machine learning and you are here only to see how GunDB works, jump to the interactive demo on "How it works" and demo Plunker on "GunDB in Artificial Intelligence".
+If you are not interested in machine learning and you are here only to see how GunDB works, jump to the interactive demo on "How it works" and Plunker demo on "GunDB in Artificial Intelligence".
 
 # The birds and the bees of Machine Learning #
 
 The rise of machine learning allowed computers the ability to learn specialized tasks without being preprogrammed to do it. 
-Here is a sample of classic particle swarm optimization, where the entire swarm learn where the optimum (*best feeding area*) is located.
-Just click on **Start** button and see how multiple swarms converge to their belief of best area. The algorithm used is a slowed down classic Particle Swarm algorithm.
+Here is a sample of classic particle swarm optimization, where the entire swarm learns where the optimum (*best feeding area*) is located.
+Just click on the **Start** button and see how multiple swarms converge to their belief of the best area. The algorithm used is a slowed down classic **[Particle Swarm](https://en.wikipedia.org/wiki/Particle_swarm_optimization)** algorithm.
 
 <iframe src="https://run.plnkr.co/plunks/SOd9dC/" style="width: 100%; height: 400px"></iframe>
 
-If you start tinkering with the population size and *reset* the evolution, you will notice that for large population sizes **>500** the swarm will converge to the same point almost everytime.
-When using small sized swarms 10 to 40, the swarms will converge in different points because there is not enough *knowledge* about the surroundings to atract the particles.
-
+If you start tinkering the population size and *reset* the evolution, you will notice that for large population sizes **>500** the swarm will converge to the same point almost everytime.
+When using small sized swarms 10 to 40, the swarms will converge in different points because there isn't enough *knowledge* about the surroundings to atract the particles.
 
 NP-Hard problems usually have a huge searching area and exhaustive searches are not an option. 
-The problem presented above is a classical benchmark problem: Schwefel, used in evaluating performance of optimization algorithms (particle swarm, genetic, simmulated annealing etc.).
+The problem presented above is a classical benchmark problem: Schwefel is used in evaluating performance of optimization algorithms (particle swarm, genetic, simmulated annealing etc.).
 The problem has a 2D searching space where the minimum (best feeding area) is located in the top left corner. 
-With every position change, each particle must be re-evaluated to check if they have a better value than previous or than globally known one  - In our case a smaller Schwefel function value.
+With every position change, each particle must be re-evaluated to check if they have a better value than the previous one or than the globally known one  - In our case a smaller Schwefel function value.
 
 <img class="img-responsive" src="{{ '/assets/img/schwefel-normalized.png'}}">
 <div class="text-center">Schwefel function representation</div>
@@ -56,9 +55,9 @@ With movement, each particle gains momentum that will allow it to move further t
 This inertia offers the chance to search for a better space further than the current global best particle. 
 In order to fully understand how the swarm is behaving you can use the simulator below. 
 Just click anywhere in the sandbox to set the global best and click on **Start** button to allow the particles to start searching the area.
-After most of the particles lost momentum change the location of the global best by clicking in another region of the sandbox.
+After most of the particles lose momentum change the location of the global best by clicking in another region of the sandbox.
 You will notice that since the particles will no longer swarm towards the global best due to the lost momentum.
-Now click on **Random Particle** button and see how a newly inserted individual will affect the swarm.
+Now click on the **Random Particle** button and see how a newly inserted individual will affect the swarm.
 
 <div style="text-align:center">
     <svg style="border: 1px solid #000" id="attractor" width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
@@ -231,20 +230,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 
-The role of GunDB in this process is the be the global archive of best individuals, notify the algorithm about a new global best and drive all the distributed swarms.
-
+The role of GunDB in this process is to be the global archive of best individuals, notify the algorithm about a new global best and drive all the distributed swarms.
 
 # GunDB in Artificial Intelligence #
 
-Usually when I ran costly optimizations, I was beginning my day with setting up a large population over a large searching space, hit **Start** button and carry on with usual activities during the day and interpreted the results the next morning.
+Usually when I ran costly optimizations, I would beginning my day with setting up a large population over a large search space, hit the **Start** button then carry on with my usual activities for that day and interpreted the results the next morning.
 Using GunDB within this type of applications was a life-changer for me. I was able to run an optimization on my home desktop computer, go to the office, start another one on my mobile and laptop and see how the miracle of collective knowledge behaves.
-At that point I was able to use multiple processing units, independent of time, space, internet connection etc. If my mobile would loose the connection for 5 minutes, at the point of reconnect, GunDB was able to sync to *global knowledge*
+At that point I was able to use multiple processing units, independent of time, space, internet connection etc. If my mobile would loose the connection for 5 minutes, at the point of reconnect, GunDB was able to sync with the *global knowledge*
 Another huge advantage was that I was able to run the same search with multiple algorithms: Particle Swarm, Genetic Algorithm etc. and use each one's advantage at the same time.
 
 Here is the same optimization problem that takes advantage of GunDB global knowledge:
 How to test: 
 
- - open a <a href="https://run.plnkr.co/plunks/0sUJjo/" target="_blank">new tab</a> with the same plunker as one below and set them side by side
+ - open a <a href="https://run.plnkr.co/plunks/0sUJjo/" target="_blank">new tab</a> with the same plunker as the one below and set them side by side
  - before enabling server integration, click on clear global best just to make sure that your population won't converge too fast
  - start both (or how many tabs you opened) instances and click reset until they are attracted to different areas of the searching domain
  - enable server integration and see how all populations are collaborating in finding the best area
@@ -288,8 +286,8 @@ optimisations.path('schwefel').on(function(data) {
 ```
 
 For each evolution cycle the best individual in the swarm is compared to the global best.
-If the global best is better than the local best, a new individual in introduced into the swarm thus becoming an atractor. 
-If the current local best value is better than global one, the local individual will be pushed to the server and to the rest of distributed swarms.
+If the global best is better than the local best, a new individual is introduced into the swarm thus becoming an atractor. 
+If the current local best value is better than the global one, the local individual will be pushed to the server and to the rest of distributed swarms.
 
 
 ```javascript
