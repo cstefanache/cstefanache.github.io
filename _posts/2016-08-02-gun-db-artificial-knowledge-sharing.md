@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Distributed Machine Learning using GunDB"
-date:   2016-08-02 10:00
+date:   2016-07-27 10:00
 img: art-inf-generic.png
 thumb: mrc-css.png
 categories: 
@@ -21,7 +21,7 @@ With the rise of mobile devices and 'mobile first' being a standard, a new requi
 
 GunDB is a realtime database of data synchronization - this means that you will no longer have to care about data management on unreliable connection.
 Everybody is doing it: Google with docs and email drafts, Microsoft online word editor and basically every application that support offline first - so why shouldn't you do it as well?
-All you have to do when using it is to sit back, relax, manipulate the data and let Gun do the syncing work for you. One major advantage of Gun, that I exploited to the maximum, is the ability to notify on data change. 
+All you have to is use it, sit back, relax, manipulate the data and let Gun do the syncing work for you. One major advantage of Gun, that I exploited to the maximum, is the ability to notify on data change. 
 This feature is a life-saver when it comes to realtime data rendering, notification and decision making.
 
 If you are not interested in machine learning and you are here only to see how GunDB works, jump to the interactive demo on "How it works" and demo Plunker on "GunDB in Artificial Intelligence".
@@ -242,7 +242,19 @@ At that point I was able to use multiple processing units, independent of time, 
 Another huge advantage was that I was able to run the same search with multiple algorithms: Particle Swarm, Genetic Algorithm etc. and use each one's advantage at the same time.
 
 Here is the same optimization problem that takes advantage of GunDB global knowledge:
-<iframe src="https://run.plnkr.co/plunks/0sUJjo/" style="width: 100%; height: 400px"></iframe>
+How to test: 
+
+ - open a <a href="https://run.plnkr.co/plunks/0sUJjo/" target="_blank">new tab</a> with the same plunker as one below and set them side by side
+ - before enabling server integration, click on clear global best just to make sure that your population won't converge too fast
+ - start both (or how many tabs you opened) instances and click reset until they are attracted to different areas of the searching domain
+ - enable server integration and see how all populations are collaborating in finding the best area
+
+<iframe src="https://run.plnkr.co/plunks/0sUJjo/" style="margin: 0 auto;" style="width: 100%" height="400"></iframe>
+
+<hr>
+Below you can see a snapshot of collected knowledge between swarms:
+<img class="img-responsive" src="{{ '/assets/img/side-by-side.png'}}">
+
 
 ## Gun Integration ##
 
@@ -320,3 +332,5 @@ Every method in the API is natural, self explanatory but powerful when it comes 
 - **gun.map(callback)**: Loop over each property in a node, and subscribe to future changes;
 - **gun.val(callback)**: Read a full object without subscribing updates;
 - **gun.not(callback)**: Handle cases where data can’t be found.
+
+The entire demo was created using [Evolutionary Computation package](https://github.com/cstefanache/evolutionary-computation), [GunDB](http://gun.js.org/enterprise/) and lots of passion.
