@@ -1,0 +1,15 @@
+{
+  "extends": "react-app",
+  "rules": {
+      "quotes": [
+          "warn",
+          "single"
+      ],
+      "react/jsx-no-duplicate-props": [
+          "warn",
+          {
+              "ignoreCase": false
+          }
+      ]
+  }
+}

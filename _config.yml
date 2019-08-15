@@ -1,26 +1,17 @@
 ### GENERAL SETTINGS ###
 
 # Site settings
-title: My Right To Code
-name: My Right To Code
-description: "My Right To Code"
+title: Custom Reality
+name: Custom Reality
+description: "Custom Reality"
 analytics: UA-75454028-1
 baseurl: "" #important: start with /
-url: "http://myrighttocode.org"
+url: "http://cstefanache.github.io"
 
 # Build settings
 markdown: kramdown
 permalink: /:categories/:title
 excerpt_separator: <!--more--> #use this in posts to define how long the excerpt of the post (that is shown on the Blog page) is
-
-colors:  #in hex code if not noted else
-  primary: "#4a4a82" #"#F70031"
-  primary_rgb: "74, 74, 130" #"247,0,49" #rgb of the primary. Needed in some places for the transparency effect.
-  secondary: "#384452" #"#33004D"
-  link: "#824a82"
-  link_hover: "#252541"
-  footer_heading: "#ffffff"
-  footer_content: "#bfc9d3"
 
 
 ### CONTACT SETTINGS ###
@@ -33,18 +24,4 @@ social:
     url: mailto:cornel.stefanache@gmail.com
 
 email: cornel.stefanache@gmail.com
-tel: +40741094841
 
-
-### GENERAL DATA FOR VARIOUS LOCATIONS ###
-
-
-
-# Short text about your company. Shown in footer on every page and also separately on Home and Contact page.
-about: "Coding for fun..."
-
-# Testimonial content. Shown on Home and About page.
-#testimonial:
-#    message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-#    author: Marcel Newman
-#    position: WEB DESIGNER - BLACKTIE.CO
