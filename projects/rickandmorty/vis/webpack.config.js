@@ -28,7 +28,7 @@ const config = {
   entry: `${__dirname}/src/index.js`,
   devtool: "inline-source-map",
   output: {
-    path: `${__dirname}/..`,
+    path: `${__dirname}/../../../rickandmorty`,
     filename: outputFile
     // library: libraryName,
     // libraryTarget: 'umd',

@@ -66,7 +66,7 @@ const allEpisodes = [
   "All"
 ];
 
-export default (query, opts = { width: 960, height: 1500 }) => {
+export default (query, opts = { width: 960, height: 820 }) => {
   const container = document.querySelector(query);
   const { width, height } = opts;
   const svg = utils.createSvg(width, height);
