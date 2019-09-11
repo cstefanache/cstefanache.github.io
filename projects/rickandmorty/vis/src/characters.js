@@ -6,8 +6,6 @@ import morty from "../../assets/morty.jpeg";
 import rick from "../../assets/rick.jpeg";
 import summer from "../../assets/summer.jpeg";
 
-import { describeArc } from "./utils";
-
 const chars = { jerry, beth, morty, rick, summer };
 
 export default (root, config, onLegendMouseEnter, onLegendMouseLeave) => {
@@ -21,10 +19,14 @@ export default (root, config, onLegendMouseEnter, onLegendMouseLeave) => {
     .append("g")
     .attr("transform", (d, index) => `translate(${index * 70}, 0)`)
     .on("mouseenter", d => {
-      onLegendMouseEnter(d);
+      if (onLegendMouseEnter) {
+        onLegendMouseEnter(d);
+      }
     })
     .on("mouseleave", d => {
-      onLegendMouseLeave(d);
+      if (onLegendMouseEnter) {
+        onLegendMouseLeave(d);
+      }
     });
 
   const arcFn = arc()
@@ -34,7 +36,8 @@ export default (root, config, onLegendMouseEnter, onLegendMouseLeave) => {
 
   legendItem
     .append("text")
-    .text(d => d)
+    .text(d => d[0].toUpperCase() + d.substr(1))
+    .attr("stroke", d => color[d])
     .attr("text-anchor", "middle")
     .attr("transform", "translate(25, 60)");
 
@@ -60,7 +63,7 @@ export default (root, config, onLegendMouseEnter, onLegendMouseLeave) => {
     .attr("stroke-width", 2)
     .attr("stroke", d => color[d])
     .attr("fill", "none")
-    .attr("transform", "translate(25, 20)")
+    .attr("transform", "translate(25, 20)");
 
   const displayForEpisode = episodeName => {
     const linesCount = {};
@@ -91,7 +94,6 @@ export default (root, config, onLegendMouseEnter, onLegendMouseLeave) => {
         .duration(750)
         .attrTween("d", arcTween(angle));
     });
-
   };
 
   return {

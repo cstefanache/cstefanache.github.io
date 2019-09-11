@@ -6,6 +6,8 @@ import characters from "./characters";
 import timeline from "./timeline";
 import sentiment from "./sentiment";
 import characterLines from "./characterLines";
+import interaction from "./interaction";
+
 import { main, leftPadding, sections } from "./constants";
 
 main.forEach(character => {
@@ -81,33 +83,6 @@ export default (query, opts = { width: 960, height: 820 }) => {
     .attr("cx", 25)
     .attr("cy", 20);
 
-  const { timelineGroup, timelineContent } = timeline(root);
-  timelineGroup.attr("transform", `translate(${leftPadding}, 400)`);
-  const sent = sentiment(timelineContent, { main, data });
-
-  const lines = characterLines(timelineContent, {
-    main,
-    data,
-    onSectionSelect: section => {
-      sent.onSectionSelect(section);
-    }
-  });
-  lines.mainGroup.attr("transform", "translate(0, 100)");
-
-  const charIcons = characters(
-    root,
-    { data },
-    d => {
-      sent.onCharacterMouseEnter(d);
-      lines.onOutsideMouseOver(d);
-    },
-    d => {
-      sent.onCharacterMouseOut(d);
-      lines.onOutsideMouseOut(d);
-    }
-  );
-  charIcons.charactersGroup.attr("transform", "translate(320, 90)");
-
   root
     .append("text")
     .text("Episode")
@@ -120,8 +95,6 @@ export default (query, opts = { width: 960, height: 820 }) => {
     .attr("font-size", 24)
     .attr("text-anchor", "middle")
     .attr("transform", `translate(${width / 2}, 60)`);
-
-  let index = 0;
 
   const next = root
     .append("path")
@@ -150,13 +123,60 @@ export default (query, opts = { width: 960, height: 820 }) => {
         selectEpisode(index);
       }
     });
+
+  const charIcons = characters(
+    root,
+    { data },
+    d => {
+      sent.onCharacterMouseEnter(d);
+      lines.onOutsideMouseOver(d);
+    },
+    d => {
+      sent.onCharacterMouseOut(d);
+      lines.onOutsideMouseOut(d);
+    }
+  );
+
+  charIcons.charactersGroup.attr("transform", "translate(320, 90)");
+
+  const interactionView =
+    document.location.search.indexOf("interaction") !== -1;
+  let inter, sent, lines;
+  let index = 0;
+  if (interactionView) {
+    /**
+     * Cohort Diagram
+     */
+    inter = interaction(root);
+    inter.interactionGroup.attr("transform", `translate(${width / 2}, 450)`);
+  } else {
+    /**
+     * Timeline content
+     */
+    const { timelineGroup, timelineContent } = timeline(root);
+    timelineGroup.attr("transform", `translate(${leftPadding}, 400)`);
+    sent = sentiment(timelineContent, { main, data });
+
+    lines = characterLines(timelineContent, {
+      main,
+      data,
+      onSectionSelect: section => {
+        sent.onSectionSelect(section);
+      }
+    });
+    lines.mainGroup.attr("transform", "translate(0, 100)");
+  }
   const selectEpisode = episodeIndex => {
     let episodeName = allEpisodes[episodeIndex];
     episodeText.text(episodeName);
+    charIcons.displayForEpisode(episodeName);
     const ep = allEpisodes[episodeIndex];
-    sent.displayForEpisode(ep);
-    lines.displayForEpisode(ep);
-    charIcons.displayForEpisode(ep);
+    if (!interactionView) {
+      sent.displayForEpisode(ep);
+      lines.displayForEpisode(ep);
+    } else {
+      inter.displayForEpisode(ep);
+    }
   };
 
   selectEpisode(index);
